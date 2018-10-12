@@ -1,0 +1,49 @@
+## custom ##
+.notnull : not null
+    java.lang.Object → if (Objects.nonNull($expr$)) {\
+	  $END$\
+	}
+
+.nn : not null
+    java.lang.Object → if (Objects.nonNull($expr$)) {\
+	  $END$\
+	}
+
+.null : is null
+    java.lang.Object → if (Objects.isNull($expr$)) {\
+	  $END$\
+	}
+
+.ibk : String is null
+    java.lang.String → if (StringUtils.isBlank($expr$)) {\
+	  $END$\
+	}
+
+.inbk : String is not null
+    java.lang.String → if (StringUtils.isNotBlank($expr$)) {\
+	  $END$\
+	}
+	
+.equals : StringUtils equals
+	java.lang.String → if (StringUtils.equals("$END$",$expr$)) {\
+	  $END$\
+	}
+	
+.notEmpty : CollectionUtils isNotEmpty
+	java.util.Collection → if (CollectionUtils.isNotEmpty($expr$)) {\
+	  $END$\
+	}
+	
+.isEmpty : CollectionUtils isEmpty
+	java.util.Collection → if (CollectionUtils.isEmpty($expr$)) {\
+	  $END$\
+	}
+	
+.log : Log a message
+    NON_VOID → LOGGER.debug("$className*:className()$ :: $methodName*:methodName()$ - > $expr$ = {}", $expr$);
+
+.fval : extract as final value
+    NON_VOID → final $type*:expressionType(expr))$ $var:suggestVariableName()$ = $expr$;
+    
+.rt : return
+    ANY → return $expr$;    
